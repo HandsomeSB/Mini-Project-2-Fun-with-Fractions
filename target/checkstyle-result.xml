@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="9.3">
+<file name="/Users/yiyunzhu/Developer/CSC207/fractioncalculator/src/main/java/edu/grinnell/csc207/util/BigFraction.java">
+<error line="4" severity="error" message="Line is longer than 100 characters (found 352)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="7" severity="error" message="Line has trailing spaces." source="com.puppycrawl.tools.checkstyle.checks.regexp.RegexpSinglelineCheck"/>
+<error line="8" severity="error" message="Line matches the illegal pattern &apos;end brace without comment&apos;." source="com.puppycrawl.tools.checkstyle.checks.regexp.RegexpCheck"/>
+</file>
+<file name="/Users/yiyunzhu/Developer/CSC207/fractioncalculator/src/main/java/edu/grinnell/csc207/util/BFCalculator.java">
+<error line="4" severity="error" message="Line is longer than 100 characters (found 267)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="7" severity="error" message="Line has trailing spaces." source="com.puppycrawl.tools.checkstyle.checks.regexp.RegexpSinglelineCheck"/>
+<error line="8" severity="error" message="Line matches the illegal pattern &apos;end brace without comment&apos;." source="com.puppycrawl.tools.checkstyle.checks.regexp.RegexpCheck"/>
+</file>
+<file name="/Users/yiyunzhu/Developer/CSC207/fractioncalculator/src/main/java/edu/grinnell/csc207/App.java">
+<error line="5" column="3" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="6" severity="error" message="Line matches the illegal pattern &apos;System.out.println&apos;." source="com.puppycrawl.tools.checkstyle.checks.regexp.RegexpCheck"/>
+<error line="7" severity="error" message="Line matches the illegal pattern &apos;end brace without comment&apos;." source="com.puppycrawl.tools.checkstyle.checks.regexp.RegexpCheck"/>
+<error line="8" severity="error" message="Line matches the illegal pattern &apos;end brace without comment&apos;." source="com.puppycrawl.tools.checkstyle.checks.regexp.RegexpCheck"/>
+</file>
+</checkstyle>
