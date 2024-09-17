@@ -1,3 +1,8 @@
 ++EuxjnH2+9piw5KzLScTea8Jrwmj5ozEgZZgo2Wr5g=
-src/main/java/edu/grinnell/csc207/App.java 2024-09-15T05:08:01.842113997Z
-src/test/java/edu/grinnell/csc207/AppTest.java 2024-09-15T05:08:01.823253634Z
+src/main/java/edu/grinnell/csc207/main/InteractiveCalculator.java 2024-09-16T22:21:18.156676595Z
+src/main/java/edu/grinnell/csc207/main/QuickCalculator.java 2024-09-15T23:23:12.629729998Z
+src/main/java/edu/grinnell/csc207/util/BFCalculator.java 2024-09-16T22:21:18.120803558Z
+src/main/java/edu/grinnell/csc207/util/BFRegisterSet.java 2024-09-16T22:27:44.142267619Z
+src/main/java/edu/grinnell/csc207/util/BigFraction.java 2024-09-16T04:12:56.771379285Z
+src/main/java/edu/grinnell/csc207/util/StringParse.java 2024-09-16T22:11:37.435284946Z
+src/test/java/edu/grinnell/csc207/TestMP02.java 2024-09-16T22:11:11.956698248Z
