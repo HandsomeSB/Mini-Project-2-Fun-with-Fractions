@@ -40,7 +40,7 @@ public class BFRegisterSet {
    * @return the value in the register
    */
   public BigFraction get(char register) {
-    return registerValues[letter2int(register)];
+    return registerValues[letter2int(register)].simplify();
   } // get(char)
 
   /** Default constructor. Sets all item in register to 0. */

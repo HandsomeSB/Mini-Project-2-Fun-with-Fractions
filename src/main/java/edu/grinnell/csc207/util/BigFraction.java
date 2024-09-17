@@ -61,6 +61,8 @@ public class BigFraction {
   public BigFraction(BigInteger numerator, BigInteger denominator) {
     this.num = numerator;
     this.denom = denominator;
+
+    this.simplifyInPlace();
   } // BigFraction(BigInteger, BigInteger)
 
   /**
@@ -74,6 +76,8 @@ public class BigFraction {
   public BigFraction(int numerator, int denominator) {
     this.num = BigInteger.valueOf(numerator);
     this.denom = BigInteger.valueOf(denominator);
+
+    this.simplifyInPlace();
   } // BigFraction(int, int)
 
   /**
@@ -95,6 +99,8 @@ public class BigFraction {
       this.num = BigInteger.valueOf(Integer.parseInt(strSplit[0]));
       this.denom = BigInteger.valueOf(Integer.parseInt(strSplit[1]));
     } // Default value cases and expected case
+
+    this.simplifyInPlace();
   } // BigFraction
 
   // +---------+------------------------------------------------------
@@ -126,8 +132,8 @@ public class BigFraction {
    */
   public BigFraction inverse() {
     if (this.numerator() == BigInteger.ZERO) {
-        System.err.println("Error: Numerator is 0, cannot inverse.");
-      return this; 
+      System.err.println("Error: Numerator is 0, cannot inverse.");
+      return this;
     } else {
       return new BigFraction(this.denominator(), this.numerator());
     } // Check if fraction is zero
@@ -202,15 +208,22 @@ public class BigFraction {
     return this.num;
   } // numerator()
 
-  public BigFraction simplify() { 
-    int min = Math.min(this.numerator().intValue(), this.denominator().intValue());
-    for(int i = min; i >= Math.sqrt(min); --i){
-        int num = this.numerator().intValue();
-        int denom = this.denominator().intValue();
-        if (num % i == 0 && denom % i == 0){
-            return new BigFraction(num / i, denom / i);
-        }
+  public BigFraction simplify() {
+    int min = Math.abs(Math.min(this.numerator().intValue(), this.denominator().intValue()));
+    for (int i = min; i > 1; --i) {
+      int num = this.numerator().intValue();
+      int denom = this.denominator().intValue();
+      if (num % i == 0 && denom % i == 0) {
+        return new BigFraction(num / i, denom / i);
+      }
     }
+    return this;
+  }
+
+  private BigFraction simplifyInPlace() {
+    BigFraction simplified = this.simplify();
+    this.num = simplified.numerator();
+    this.denom = simplified.denominator();
     return this;
   }
 
@@ -224,6 +237,11 @@ public class BigFraction {
     if (this.num.equals(BigInteger.ZERO)) {
       return "0";
     } // if it's zero
+
+    this.simplifyInPlace();
+    if (this.denom.equals(BigInteger.ONE)) {
+      return "" + this.num;
+    }
 
     // Lump together the string represention of the numerator,
     // a slash, and the string representation of the denominator

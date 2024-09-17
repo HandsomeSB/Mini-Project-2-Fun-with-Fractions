@@ -13,47 +13,31 @@ import java.util.Scanner;
  */
 public class InteractiveCalculator {
 
-    public static BigFraction processCommand(String input, BFCalculator calc) { 
-        String[] inputSplits = input.split(" ");
+  public static BigFraction processCommand(String input, BFCalculator calc) {
+    String[] inputSplits = input.split(" ");
 
-        if (inputSplits.length == 0) {
-            System.err.println("Error: empty input");
-            return null;
-        } else if (inputSplits[0].equals("QUIT")) {
-            return null; //break the loop
-        } else if (inputSplits[0].equals("STORE")) {
-            if (inputSplits.length < 2) { 
-                System.err.println("Error: STORE command requires 1 extra parameter");
-                return null;
-            } else if (!StringParse.isSingleLowercaseLetter(inputSplits[1])){
-                System.err.println("Error: parameter should be a single lowercase letter");
-                return null;
-            } else {
-                calc.store(inputSplits[1].charAt(0));
-            }
-        } else if(!StringParse.isValidFormat(input)){
-            System.err.println("Error: Wrong format");
-            return null;
-        }
-        else {
-            calc.clear();
-            String operator = "+";
-            for (String str : inputSplits) {
-                // Valid input: 1/3 1 a
-                if (!StringParse.isValidTerm(str)) {
-                    System.err.println("Error: Invalid Input");
-                    return null;
-                } // Check valid inputs
-
-                if (StringParse.isOperator(str)) {
-                    operator = str;
-                } else {
-                    calc.handleOperators(operator, calc.handleValue(str));
-                } // operator logics
-            } // for each input items
-        }
-        return calc.get().simplify();
+    if (StringParse.isValidInput(input)) {
+      if (inputSplits[0].equals("STORE")) {
+        calc.store(inputSplits[1].charAt(0));
+        return null;
+      } else if (inputSplits[0].equals("QUIT")) {
+        return null;
+      } else {
+        calc.clear();
+        String operator = "+";
+        for (String str : inputSplits) {
+          if (StringParse.isOperator(str)) {
+            operator = str;
+          } else {
+            calc.handleOperators(operator, calc.handleValue(str));
+          } // operator logics
+        } // for each input items
+      }
+    } else {
+      return null;
     }
+    return calc.get();
+  }
 
   /**
    * Main function of the program. QUIT to quit STORE x to store value in a key
@@ -70,7 +54,7 @@ public class InteractiveCalculator {
     while (!input.equals("QUIT")) {
       input = scan.nextLine();
       BigFraction result = processCommand(input, calc);
-      if(result != null) {
+      if (result != null) {
         pen.println(result);
       }
     } // main logic loop
