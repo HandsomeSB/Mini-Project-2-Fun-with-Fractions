@@ -42,25 +42,46 @@ public class StringParse {
     return str.matches("[+\\-*/]");
   } // isOperator(String)
 
+  /**
+   * Check if a single term is valid within an expression. is fraction, operator, single lowercase
+   * letter, or a number
+   *
+   * @param str the single term to check
+   * @return true if term is valid
+   */
   public static boolean isValidTerm(String str) {
     return (StringParse.isFraction(str)
         || StringParse.isOperator(str)
         || StringParse.isSingleLowercaseLetter(str)
         || StringParse.isNumber(str));
-  }
+  } // isValidTermm
 
+  /**
+   * Check if the expression is in valid format. Not valid if two operators/numbers in a row. Not
+   * valid if any of the terms is invalid.
+   *
+   * @param input the full input expression
+   * @return true if input is a valid expression
+   */
   public static boolean isValidFormat(String input) {
     String[] inputSplits = input.split(" ");
     boolean wasOperator = isOperator(inputSplits[0]);
     for (int i = 1; i < inputSplits.length; ++i) {
       if (wasOperator == isOperator(inputSplits[i]) || !isValidTerm(inputSplits[i])) {
         return false;
-      }
+      } // Check no consecutive operator/number and is valid term
       wasOperator = isOperator(inputSplits[i]);
-    }
-    return true && isValidTerm(inputSplits[0]);
-  }
+    } // For each term starting from 1
+    return isValidTerm(inputSplits[0]); // Check if first term is valid
+  } // isValidFormat
 
+  /**
+   * Check if input is valid. Differs from isValidFormat, isValidInput checks for STORE and QUIT
+   * commands as well
+   *
+   * @param input the full string input
+   * @return true if input is valid
+   */
   public static boolean isValidInput(String input) {
     String[] inputSplits = input.split(" ");
 
@@ -76,7 +97,7 @@ public class StringParse {
         return false;
       } else {
         return true;
-      }
+      } // Conditions specific to STORE command
     } else if (inputSplits[0].equals("QUIT")) {
       return true;
     } else if (!StringParse.isValidFormat(input)) {
@@ -84,6 +105,6 @@ public class StringParse {
       return false;
     } else {
       return true;
-    }
-  }
+    } // input cases
+  } // isValidInput
 } // StringParse

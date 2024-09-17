@@ -103,6 +103,39 @@ public class BigFraction {
     this.simplifyInPlace();
   } // BigFraction
 
+  /**
+   * Builds a new fraction. Will not simplify if isSimplified is set to true
+   *
+   * @param numerator numerator
+   * @param denominator denominator
+   * @param isSimplified true if fraction is already simplified
+   */
+  private BigFraction(int numerator, int denominator, boolean isSimplified) {
+    this.num = BigInteger.valueOf(numerator);
+    this.denom = BigInteger.valueOf(denominator);
+    if (!isSimplified) {
+      this.simplifyInPlace();
+    } // if simplified
+  } // BigFraction(int, int, boolean)
+
+  /**
+   * Build a new fraction with numerator num and denominator denom.
+   *
+   * <p>Warning! Not yet stable.
+   *
+   * @param numerator The numerator of the fraction.
+   * @param denominator The denominator of the fraction.
+   * @param isSimplified If fraction is already simplified. Or if no simplification desired
+   */
+  public BigFraction(BigInteger numerator, BigInteger denominator, boolean isSimplified) {
+    this.num = numerator;
+    this.denom = denominator;
+
+    if (!isSimplified) {
+      this.simplifyInPlace();
+    } // if simplified
+  } // BigFraction(BigInteger, BigInteger, boolean)
+
   // +---------+------------------------------------------------------
   // | Methods |
   // +---------+
@@ -208,24 +241,37 @@ public class BigFraction {
     return this.num;
   } // numerator()
 
+  /**
+   * Simplifies the fraction and returns a simplified object. If fraction already simplified,
+   * return. the same object
+   *
+   * @return A simplified fraction
+   */
   public BigFraction simplify() {
-    int min = Math.abs(Math.min(this.numerator().intValue(), this.denominator().intValue()));
-    for (int i = min; i > 1; --i) {
-      int num = this.numerator().intValue();
-      int denom = this.denominator().intValue();
-      if (num % i == 0 && denom % i == 0) {
-        return new BigFraction(num / i, denom / i);
-      }
-    }
-    return this;
-  }
+    BigInteger gcd = this.numerator().gcd(this.denominator());
+    return new BigFraction(this.numerator().divide(gcd), this.denominator().divide(gcd), true);
+  } // simplify
 
-  private BigFraction simplifyInPlace() {
+  /**
+   * Simplifies the fraction in place.
+   *
+   * @return the objectect the method belongs to.
+   */
+  public BigFraction simplifyInPlace() {
     BigFraction simplified = this.simplify();
     this.num = simplified.numerator();
     this.denom = simplified.denominator();
     return this;
-  }
+  } // simplifyInPlace
+
+  /**
+   * Make a copy of the object.
+   *
+   * @return the copy.
+   */
+  public BigFraction copy() {
+    return new BigFraction(this.numerator(), this.denominator(), true);
+  } // copy
 
   /**
    * Convert this fraction to a string for ease of printing.
@@ -241,7 +287,7 @@ public class BigFraction {
     this.simplifyInPlace();
     if (this.denom.equals(BigInteger.ONE)) {
       return "" + this.num;
-    }
+    } // if denominator is one
 
     // Lump together the string represention of the numerator,
     // a slash, and the string representation of the denominator

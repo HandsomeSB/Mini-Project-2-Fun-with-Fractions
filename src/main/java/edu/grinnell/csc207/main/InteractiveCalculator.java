@@ -13,6 +13,13 @@ import java.util.Scanner;
  */
 public class InteractiveCalculator {
 
+  /**
+   * Process a single line of command for interactive calculator.
+   *
+   * @param input a single line input from user
+   * @param calc BFCalculator instance
+   * @return the result from the calculator
+   */
   public static BigFraction processCommand(String input, BFCalculator calc) {
     String[] inputSplits = input.split(" ");
 
@@ -32,12 +39,12 @@ public class InteractiveCalculator {
             calc.handleOperators(operator, calc.handleValue(str));
           } // operator logics
         } // for each input items
-      }
+      } // Control flow for valid options
     } else {
       return null;
-    }
+    } // check valid input
     return calc.get();
-  }
+  } // processCommand(String, BFCalculator)
 
   /**
    * Main function of the program. QUIT to quit STORE x to store value in a key
@@ -56,7 +63,7 @@ public class InteractiveCalculator {
       BigFraction result = processCommand(input, calc);
       if (result != null) {
         pen.println(result);
-      }
+      } // print nothing if result is null
     } // main logic loop
     scan.close();
   } // main
