@@ -77,6 +77,8 @@ public class StringParse {
       } else {
         return true;
       }
+    } else if (inputSplits[0].equals("QUIT")) {
+      return true;
     } else if (!StringParse.isValidFormat(input)) {
       System.err.println("Error: Wrong format");
       return false;
