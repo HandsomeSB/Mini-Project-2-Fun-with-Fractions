@@ -202,6 +202,18 @@ public class BigFraction {
     return this.num;
   } // numerator()
 
+  public BigFraction simplify() { 
+    int min = Math.min(this.numerator().intValue(), this.denominator().intValue());
+    for(int i = min; i >= Math.sqrt(min); --i){
+        int num = this.numerator().intValue();
+        int denom = this.denominator().intValue();
+        if (num % i == 0 && denom % i == 0){
+            return new BigFraction(num / i, denom / i);
+        }
+    }
+    return this;
+  }
+
   /**
    * Convert this fraction to a string for ease of printing.
    *

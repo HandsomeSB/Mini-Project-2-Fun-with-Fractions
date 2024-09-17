@@ -14,7 +14,45 @@ import java.util.Scanner;
 public class InteractiveCalculator {
 
     public static BigFraction processCommand(String input, BFCalculator calc) { 
-        return BigFraction.ZERO;
+        String[] inputSplits = input.split(" ");
+
+        if (inputSplits.length == 0) {
+            System.err.println("Error: empty input");
+            return null;
+        } else if (inputSplits[0].equals("QUIT")) {
+            return null; //break the loop
+        } else if (inputSplits[0].equals("STORE")) {
+            if (inputSplits.length < 2) { 
+                System.err.println("Error: STORE command requires 1 extra parameter");
+                return null;
+            } else if (!StringParse.isSingleLowercaseLetter(inputSplits[1])){
+                System.err.println("Error: parameter should be a single lowercase letter");
+                return null;
+            } else {
+                calc.store(inputSplits[1].charAt(0));
+            }
+        } else if(!StringParse.isValidFormat(input)){
+            System.err.println("Error: Wrong format");
+            return null;
+        }
+        else {
+            calc.clear();
+            String operator = "+";
+            for (String str : inputSplits) {
+                // Valid input: 1/3 1 a
+                if (!StringParse.isValidTerm(str)) {
+                    System.err.println("Error: Invalid Input");
+                    return null;
+                } // Check valid inputs
+
+                if (StringParse.isOperator(str)) {
+                    operator = str;
+                } else {
+                    calc.handleOperators(operator, calc.handleValue(str));
+                } // operator logics
+            } // for each input items
+        }
+        return calc.get().simplify();
     }
 
   /**
@@ -26,44 +64,15 @@ public class InteractiveCalculator {
     Scanner scan = new Scanner(System.in);
     PrintWriter pen = new PrintWriter(System.out, true);
     BFCalculator calc = new BFCalculator();
+    calc.clear();
 
     String input = " ";
-    mainloop:
     while (!input.equals("QUIT")) {
       input = scan.nextLine();
-      String[] inputSplits = input.split(" ");
-
-      if (inputSplits.length == 0) {
-        System.err.println("Error: empty input");
-        continue;
-      } else if (inputSplits[0].equals("QUIT")) {
-        break;
-      } else if (inputSplits[0].equals("STORE")) {
-        pen.println("STORE");
-        calc.store(inputSplits[1].charAt(0));
-      } else {
-        calc.clear();
-        String operator = "+";
-        for (String str : inputSplits) {
-          // Valid input: 1/3 1 a
-          if (!(StringParse.isFraction(str)
-              || StringParse.isOperator(str)
-              || StringParse.isSingleLowercaseLetter(str)
-              || StringParse.isNumber(str))) {
-            // https://stackoverflow.com/questions/886955/how-do-i-break-out-of-nested-loops-in-java
-            System.err.println("Error: Invalid Input");
-            continue mainloop;
-          } // Check valid inputs
-
-          if (StringParse.isOperator(str)) {
-            operator = str;
-          } else {
-            calc.handleOperators(operator, calc.handleValue(str));
-          } // operator logics
-        } // for each input items
-
-        pen.println(calc.get());
-      } // input parsing
+      BigFraction result = processCommand(input, calc);
+      if(result != null) {
+        pen.println(result);
+      }
     } // main logic loop
     scan.close();
   } // main
