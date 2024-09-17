@@ -14,6 +14,25 @@ import java.util.Scanner;
 public class InteractiveCalculator {
 
   /**
+   * Evaluates a valid expression. <br>
+   * Does not return anything, stores the calculated value in calc
+   *
+   * @param inputArray List of expressions in order
+   * @param calc BFCalculator instance
+   */
+  public static void evaluateExpression(String[] inputArray, BFCalculator calc) {
+    calc.clear();
+    String operator = "+";
+    for (String str : inputArray) {
+      if (StringParse.isOperator(str)) {
+        operator = str;
+      } else {
+        calc.handleOperators(operator, calc.handleValue(str));
+      } // operator logics
+    } // for each input items
+  } // evaluateExpression(String[], BFCalculator)
+
+  /**
    * Process a single line of command for interactive calculator.
    *
    * @param input a single line input from user
@@ -30,15 +49,7 @@ public class InteractiveCalculator {
       } else if (inputSplits[0].equals("QUIT")) {
         return null;
       } else {
-        calc.clear();
-        String operator = "+";
-        for (String str : inputSplits) {
-          if (StringParse.isOperator(str)) {
-            operator = str;
-          } else {
-            calc.handleOperators(operator, calc.handleValue(str));
-          } // operator logics
-        } // for each input items
+        evaluateExpression(inputSplits, calc);
       } // Control flow for valid options
     } else {
       return null;

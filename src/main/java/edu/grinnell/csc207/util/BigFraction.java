@@ -119,7 +119,8 @@ public class BigFraction {
   } // BigFraction(int, int, boolean)
 
   /**
-   * Build a new fraction with numerator num and denominator denom.
+   * Build a new fraction with numerator num and denominator denom. Will not simplify if
+   * isSimplified is set to true
    *
    * <p>Warning! Not yet stable.
    *
