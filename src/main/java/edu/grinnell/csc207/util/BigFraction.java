@@ -6,7 +6,7 @@ import java.math.BigInteger;
  * A simple implementation of arbitrary-precision Fractions.
  *
  * @author Samuel A. Rebelsky
- * @author YOUR NAME HERE
+ * @author Harrison Zhu
  */
 public class BigFraction {
   // +------------------+---------------------------------------------

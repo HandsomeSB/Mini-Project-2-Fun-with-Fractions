@@ -1,6 +1,10 @@
 package edu.grinnell.csc207.util;
 
-/** Util function to process the user inputs for the calculator program. */
+/**
+ * Util function to process the user inputs for the calculator program.
+ *
+ * @author Harrison Zhu
+ */
 public class StringParse {
   /**
    * Check if string contains a single lowercase letter ONLY. e.g. "e"

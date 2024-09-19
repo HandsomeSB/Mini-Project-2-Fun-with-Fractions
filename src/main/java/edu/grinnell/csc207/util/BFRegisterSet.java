@@ -4,6 +4,8 @@ package edu.grinnell.csc207.util;
  * A set of registers corresponding to the letters 'a' through 'z'. It should provide the following
  * methods. As with the case of BFCalculator, these should all be object methods so that we can have
  * multiple register sets.
+ *
+ * @author Harrison Zhu
  */
 public class BFRegisterSet {
 

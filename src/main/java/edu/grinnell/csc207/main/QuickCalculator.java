@@ -5,8 +5,10 @@ import edu.grinnell.csc207.util.BigFraction;
 import java.io.PrintWriter;
 
 /**
- * Here, you will provide a main method that will take the expressions from the command line (rather
- * than user input) and then print out the results.
+ * Uses the same calculator logic as interactive calculator. Expects a sequence of expressions in
+ * command line arguments rather than asking for input
+ *
+ * @author Harrison Zhu
  */
 public class QuickCalculator {
   /**

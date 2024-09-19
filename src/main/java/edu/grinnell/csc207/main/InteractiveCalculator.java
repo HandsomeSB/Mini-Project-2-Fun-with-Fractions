@@ -7,9 +7,10 @@ import java.io.PrintWriter;
 import java.util.Scanner;
 
 /**
- * Here, you will provide a main method that will repeatedly read a line the user types, use a
- * BFCalculator to compute the result, and print the result for the user. This type interaction is
- * often called a “REPL”, for “Read-Eval-Print loop”.
+ * Interactive calculator that computes mathematical operations on fractions. Repeatedly asks for
+ * inputs. QUIT to quit, STORE x to store last computed value.
+ *
+ * @author Harrison Zhu
  */
 public class InteractiveCalculator {
 

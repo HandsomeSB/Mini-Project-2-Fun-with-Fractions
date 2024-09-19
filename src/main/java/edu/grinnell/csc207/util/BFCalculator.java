@@ -4,6 +4,8 @@ package edu.grinnell.csc207.util;
  * The primary workhorse. This class should have a field that stores the last value calculated and
  * provide the following methods. (Note that all of these methods are object methods, not static
  * methods; we should be able to invoke multiple calculators simultaneously.)
+ *
+ * @author Harrison Zhu
  */
 public class BFCalculator {
   /** Last calculated value. Initialize to BigFraction.ZERO */
