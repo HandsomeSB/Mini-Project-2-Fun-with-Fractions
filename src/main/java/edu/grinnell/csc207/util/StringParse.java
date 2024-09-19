@@ -76,7 +76,9 @@ public class StringParse {
       } // Check no consecutive operator/number and is valid term
       wasOperator = isOperator(inputSplits[i]);
     } // For each term starting from 1
-    return isValidTerm(inputSplits[0]); // Check if first term is valid
+    return isValidTerm(inputSplits[0]) // Check if first term is valid
+        && !isOperator(inputSplits[0]) // First term can't be operator
+        && !isOperator(inputSplits[inputSplits.length - 1]);  // Last term can't be operator
   } // isValidFormat
 
   /**

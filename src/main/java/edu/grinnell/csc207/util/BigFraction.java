@@ -250,7 +250,10 @@ public class BigFraction {
    */
   public BigFraction simplify() {
     BigInteger gcd = this.numerator().gcd(this.denominator());
-    return new BigFraction(this.numerator().divide(gcd), this.denominator().divide(gcd), true);
+    BigInteger negativeDenom = BigInteger.valueOf(this.denominator().intValue() < 0 ? -1 : 1);
+    BigInteger n = this.numerator().divide(gcd).multiply(negativeDenom);
+    BigInteger d = this.denominator().divide(gcd).multiply(negativeDenom);
+    return new BigFraction(n, d, true);
   } // simplify
 
   /**
